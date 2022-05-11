@@ -9,7 +9,7 @@
       use_proxy: no
       use_ssl: yes
       validate_certs: no
-tasks:
+  tasks:
   - name: Add a new contract
     aci_contract:
       tenant: "{{ Tenant }}"
