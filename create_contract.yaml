@@ -12,7 +12,6 @@
   tasks:
   - name: Add a new contract
     aci_contract:
-      <<: *aci_login
       tenant: "{{ Tenant }}"
       contract: "{{ CtName  }}"
       scope: "{{ CtScope  }}"
