@@ -20,6 +20,7 @@
 
   - name: Add a new contract subject
     aci_contract_subject:
+      <<: *aci_login
       tenant: "{{ Tenant }}"
       contract: "{{ CtName  }}"
       subject: "{{ CtSubject  }}"
