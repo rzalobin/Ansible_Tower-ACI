@@ -17,7 +17,6 @@
       scope: "{{ CtScope  }}"
       state: present
       validate_certs: no
-    delegate_to: localhost
 
   - name: Add a new contract subject
     aci_contract_subject:
