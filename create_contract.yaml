@@ -1,0 +1,27 @@
+---
+- hosts: all
+  connection: local
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ inventory_hostname }}'
+      username: '{{ lookup("env", "ANSIBLE_NET_USERNAME") }}'
+      password: '{{ lookup("env", "ANSIBLE_NET_PASSWORD") }}'
+      use_proxy: no
+      use_ssl: yes
+      validate_certs: no
+tasks:
+  - name: Add a new contract
+    aci_contract:
+      tenant: "{{ Tenant }}"
+      contract: "{{ CtName  }}"
+      scope: "{{ CtScope  }}"
+      state: present
+      validate_certs: no
+    delegate_to: localhost
+
+  - name: Add a new contract subject
+    aci_contract_subject:
+      tenant: "{{ Tenant }}"
+      contract: "{{ CtName  }}"
+      subject: "{{ CtSubject  }}"
+      reverse_filter: yes
