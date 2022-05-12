@@ -9,7 +9,6 @@
       use_proxy: no
       use_ssl: yes
       validate_certs: no
-
       tasks:
       - name: CREATE ACI TENANT APP PROFILE
         aci_ap:
