@@ -9,25 +9,25 @@
       use_proxy: no
       use_ssl: yes
       validate_certs: no
-      tasks:
-      - name: CREATE ACI TENANT APP PROFILE
-        aci_ap:
-          <<: *aci_login
-          ap: '{{ap_name}}'
-          tenant: '{{tenant_name}}'
+  tasks:
+  - name: CREATE ACI TENANT APP PROFILE
+    aci_ap:
+      <<: *aci_login
+      ap: '{{ap_name}}'
+      tenant: '{{tenant_name}}'
 
-      - name: CREATE ACI TENANT APP PROFILE EPG-1
-        aci_epg:
-          <<: *aci_login
-          epg: '{{epg1_name}}'
-          ap: '{{ap_name}}'
-          tenant: '{{tenant_name}}'
-          bd: '{{bd_name}}'
+  - name: CREATE ACI TENANT APP PROFILE EPG-1
+    aci_epg:
+      <<: *aci_login
+      epg: '{{epg1_name}}'
+      ap: '{{ap_name}}'
+      tenant: '{{tenant_name}}'
+      bd: '{{bd_name}}'
 
-      - name: CREATE ACI TENANT APP PROFILE EPG-2
-        aci_epg:
-          <<: *aci_login
-          epg: '{{epg2_name}}'
-          ap: '{{ap_name}}'
-          tenant: '{{tenant_name}}'
-          bd: '{{bd_name}}'
+  - name: CREATE ACI TENANT APP PROFILE EPG-2
+    aci_epg:
+      <<: *aci_login
+      epg: '{{epg2_name}}'
+      ap: '{{ap_name}}'
+      tenant: '{{tenant_name}}'
+      bd: '{{bd_name}}'
