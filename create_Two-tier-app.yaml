@@ -33,11 +33,11 @@
       bd: '{{bd_name}}'
 
   - name: Add a new contract to EPG binding
-    cisco.aci.aci_epg_to_contract:
-      <<: *aci_login
-      tenant: '{{tenant_name}}'
-      ap: '{{ap_name}}'
-      epg: '{{epg1_name}}'
-      contract: Ext_2_Web
-      contract_type: provider
-      state: present
+  cisco.aci.aci_epg_to_contract:
+    <<: *aci_login
+    tenant: '{{tenant_name}}'
+    ap: '{{ap_name}}'
+    epg: '{{epg1_name}}'
+    contract: Ext_2_Web
+    contract_type: provider
+    state: present
