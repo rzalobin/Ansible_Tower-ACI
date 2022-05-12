@@ -32,7 +32,7 @@
       tenant: '{{tenant_name}}'
       bd: '{{bd_name}}'
 
-  - name: Add a L3Out contract to EPG-1 binding
+  - name: Add a new contract to EPG binding
     cisco.aci.aci_epg_to_contract:
       <<: *aci_login
       tenant: '{{tenant_name}}'
