@@ -10,22 +10,22 @@
       use_ssl: yes
       validate_certs: no
   tasks:
-  - name: Add a new contract to EPG binding
-    aci_epg_to_contract:
-      <<: *aci_login
-    tenant: '{{tenant_name}}'
-    ap: '{{ap_name}}'
-    epg: '{{epg1_name}}'
-    contract: "{{ CtName  }}"
-    contract_type: consumer
-    state: present
+    - name: Add a new contract to EPG binding
+      aci_epg_to_contract:
+        <<: *aci_login
+        tenant: '{{tenant_name}}'
+        ap: '{{ap_name}}'
+        epg: '{{epg1_name}}'
+        contract: "{{ CtName  }}"
+        contract_type: consumer
+        state: present
 
-  - name: Add a new contract to EPG binding
-    aci_epg_to_contract:
-      <<: *aci_login
-    tenant: '{{tenant_name}}'
-    ap: '{{ap_name}}'
-    epg: '{{epg2_name}}'
-    contract: "{{ CtName  }}"
-    contract_type: provider
-    state: present
+    - name: Add a new contract to EPG binding
+      aci_epg_to_contract:
+        <<: *aci_login
+        tenant: '{{tenant_name}}'
+        ap: '{{ap_name}}'
+        epg: '{{epg2_name}}'
+        contract: "{{ CtName  }}"
+        contract_type: provider
+        state: present
