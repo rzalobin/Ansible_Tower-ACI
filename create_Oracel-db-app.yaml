@@ -1,0 +1,35 @@
+---
+- hosts:                 all
+  connection:            local
+  vars:
+    aci_login:           &aci_login
+      hostname:          '{{ inventory_hostname }}'
+      username:          '{{ lookup("env", "ANSIBLE_NET_USERNAME") }}'
+      password:          '{{ lookup("env", "ANSIBLE_NET_PASSWORD") }}'
+      use_proxy:         no
+      use_ssl:           yes
+      validate_certs:    no
+  tasks:
+  - name:                CREATE ACI TENANT APP PROFILE
+    aci_ap:
+      <<:                *aci_login
+      ap:                '{{ap_name}}'
+      tenant:            'McGill_Uni'
+
+  - name:                CREATE ACI TENANT APP PROFILE EPG-1
+    aci_epg:
+      <<:                *aci_login
+      epg:               '{{epg1_name}}'
+      ap:                '{{ap_name}}'
+      tenant:            'McGill_Uni'
+      bd:                'bd-01'
+
+  - name:                Add a new contract to EPG binding
+    aci_epg_to_contract:
+     <<:                 *aci_login
+     tenant:             'McGill_Uni'
+     ap:                 '{{ap_name}}'
+     epg:                '{{epg1_name}}'
+     contract:           Oracle
+     contract_type:      provider
+     state:              present
