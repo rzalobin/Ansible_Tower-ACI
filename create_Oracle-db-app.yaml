@@ -32,8 +32,8 @@
       <<: *aci_login
       tenant: 'McGill_Uni'
       bd: 'bd-02'
-      gateway: 10.0.0.1
-      mask: 255.255.255.0
+      gateway: '10.0.0.1'
+      mask: '255.255.255.0'
 
   - name:                CREATE ACI TENANT APP PROFILE EPG-1
     aci_epg:
