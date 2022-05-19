@@ -33,20 +33,20 @@
     tenant: 'McGill_Uni'
     bd: 'bd-02'
 
-  - name:                CREATE ACI TENANT APP PROFILE EPG-1
-    aci_epg:
-      <<:                *aci_login
-      epg:               '{{epg1_name}}'
-      ap:                '{{ap_name}}'
-      tenant:            'McGill_Uni'
-      bd:                'bd-02'
+- name:                CREATE ACI TENANT APP PROFILE EPG-1
+  aci_epg:
+    <<:                *aci_login
+    epg:               '{{epg1_name}}'
+    ap:                '{{ap_name}}'
+    tenant:            'McGill_Uni'
+    bd:                'bd-02'
 
-  - name:                Add a new contract to EPG binding
-    aci_epg_to_contract:
-     <<:                 *aci_login
-     tenant:             'McGill_Uni'
-     ap:                 '{{ap_name}}'
-     epg:                '{{epg1_name}}'
-     contract:           Oracle
-     contract_type:      provider
-     state:              present
+- name:                Add a new contract to EPG binding
+  aci_epg_to_contract:
+   <<:                 *aci_login
+   tenant:             'McGill_Uni'
+   ap:                 '{{ap_name}}'
+   epg:                '{{epg1_name}}'
+   contract:           Oracle
+   contract_type:      provider
+   state:              present
