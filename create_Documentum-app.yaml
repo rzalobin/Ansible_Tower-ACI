@@ -49,7 +49,6 @@
       contract: FE_2_CMS
       scope: application-profile
       state: present
-      validate_certs: no
 
   - name: Add a new contract subject
     aci_contract_subject:
@@ -69,7 +68,6 @@
   - aci_filter_entry:
       <<: *aci_login
       state: present
-      validate_certs: no
       entry: CIS
       tenant: 'McGill_Uni'
       ether_type: ip
@@ -132,7 +130,6 @@
   - aci_filter_entry:
       <<: *aci_login
       state: present
-      validate_certs: no
       entry: Documentum
       tenant: 'McGill_Uni'
       ether_type: ip
@@ -153,7 +150,7 @@
     cisco.aci.aci_l3out_extepg_to_contract:
       <<: *aci_login
       tenant: 'McGill_Uni'
-      l3out: L3Out-External
+      l3out: L3Out-Ext
       extepg: Ext-L3
       contract: Ext_2_DM
       contract_type: consumer
