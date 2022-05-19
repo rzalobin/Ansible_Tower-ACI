@@ -147,7 +147,7 @@
       state: present
 
   - name: Bind a contract to an external EPG
-    ACI_L3OUT_EXTEPG_TO_CONTRACT:
+    aci_l3out_extepg_to_contract:
       <<: *aci_login
       tenant: McGill_Uni
       l3out: L3Out-Ext
