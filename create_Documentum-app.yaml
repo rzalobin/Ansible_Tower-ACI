@@ -149,7 +149,7 @@
   - name: Bind a contract to an external EPG
     aci_l3out_extepg_to_contract:
       <<: *aci_login
-      tenant: 'McGill_Uni'
+      tenant: McGill_Uni
       l3out: L3Out-Ext
       extepg: Ext-L3
       contract: Ext_2_DM
