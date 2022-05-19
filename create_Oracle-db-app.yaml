@@ -49,6 +49,6 @@
      tenant:             'McGill_Uni'
      ap:                 '{{ap_name}}'
      epg:                '{{epg1_name}}'
-     contract:           Oracle
+     contract:           Database-01
      contract_type:      provider
      state:              present
