@@ -1,0 +1,178 @@
+---
+- hosts: all
+  connection: local
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ inventory_hostname }}'
+      username: '{{ lookup("env", "ANSIBLE_NET_USERNAME") }}'
+      password: '{{ lookup("env", "ANSIBLE_NET_PASSWORD") }}'
+      use_proxy: no
+      use_ssl: yes
+      validate_certs: no
+  tasks:
+  - name: CREATE ACI TENANT APP PROFILE
+    aci_ap:
+      <<: *aci_login
+      ap: '{{ap_name}}'
+      tenant: McGill_Uni
+
+  - name: CREATE ACI TENANT APP PROFILE EPG-1
+    aci_epg:
+      <<: *aci_login
+      epg: '{{epg_fe_name}}'
+      ap: '{{ap_name}}'
+      tenant: McGill_Uni
+      bd: bd-01
+
+  - name: CREATE ACI TENANT APP PROFILE EPG-2
+    aci_epg:
+      <<: *aci_login
+      epg: '{{epg_app_name}}'
+      ap: '{{ap_name}}'
+      tenant: McGill_Uni
+      bd: bd-01
+
+  - name: Add a new contract to EPG binding
+    aci_epg_to_contract:
+     <<: *aci_login
+     tenant: McGill_Uni
+     ap: '{{ap_name}}'
+     epg: '{{epg_app_name}}'
+     contract: Database-01
+     contract_type: consumer
+     state: present
+
+  - name: Add a new contract
+    aci_contract:
+      <<: *aci_login
+      tenant: McGill_Uni
+      contract: FE_2_CMS
+      scope: application-profile
+      state: present
+      validate_certs: no
+
+  - name: Add a new contract subject
+    aci_contract_subject:
+      <<: *aci_login
+      tenant: McGill_Uni
+      contract: FE_2_CMS
+      subject: Sub-01
+      reverse_filter: yes
+
+  - name: Add a new filter to a tenant
+    aci_filter:
+      <<: *aci_login
+      filter: Content-Server
+      tenant: McGill_Uni
+      state: present
+      validate_certs: no
+
+  - aci_filter_entry:
+      <<: *aci_login
+      state: present
+      validate_certs: no
+      entry: CIS
+      tenant: McGill_Uni
+      ether_type: ip
+      ip_protocol: tcp
+      dst_port: 47625
+      filter: Content-Server
+
+  - name: Add a new contract subject to filter binding
+    aci_contract_subject_to_filter:
+      <<: *aci_login
+      tenant: McGill_Uni
+      contract: FE_2_CMS
+      subject: Sub-01
+      filter: Content-Server
+      state: present
+      validate_certs: no
+
+  - name: Add a new contract to EPG binding
+    aci_epg_to_contract:
+     <<: *aci_login
+     tenant: McGill_Uni
+     ap: '{{ap_name}}'
+     epg: '{{epg_fe_name}}'
+     contract: FE_2_CMS
+     contract_type: consumer
+     state: present
+
+  - name: Add a new contract to EPG binding
+    aci_epg_to_contract:
+     <<: *aci_login
+     tenant: McGill_Uni
+     ap: '{{ap_name}}'
+     epg: '{{epg_app_name}}'
+     contract: FE_2_CMS
+     contract_type: provider
+     state: present
+
+
+
+
+- name: Add a new contract
+  aci_contract:
+    <<: *aci_login
+    tenant: McGill_Uni
+    contract: Ext_2_DM
+    scope: context
+    state: present
+    validate_certs: no
+
+- name: Add a new contract subject
+  aci_contract_subject:
+    <<: *aci_login
+    tenant: McGill_Uni
+    contract: Ext_2_DM
+    subject: Sub-01
+    reverse_filter: yes
+
+- name: Add a new filter to a tenant
+  aci_filter:
+    <<: *aci_login
+    filter: Documentum-FE
+    tenant: McGill_Uni
+    state: present
+    validate_certs: no
+
+- aci_filter_entry:
+    <<: *aci_login
+    state: present
+    validate_certs: no
+    entry: Documentum
+    tenant: McGill_Uni
+    ether_type: ip
+    ip_protocol: tcp
+    dst_port: 8080
+    filter: Documentum-FE
+
+- name: Add a new contract subject to filter binding
+  aci_contract_subject_to_filter:
+    <<: *aci_login
+    tenant: McGill_Uni
+    contract: Ext_2_DM
+    subject: Sub-01
+    filter: Documentum-FE
+    state: present
+    validate_certs: no
+
+- name: Bind a contract to an external EPG
+  cisco.aci.aci_l3out_extepg_to_contract:
+    <<: *aci_login
+    tenant: McGill_Uni
+    l3out: L3Out-External
+    extepg : Ext-L3
+    contract: Ext_2_DM
+    contract_type: consumer
+    state: present
+
+- name: Add a new contract to EPG binding
+  aci_epg_to_contract:
+   <<: *aci_login
+   tenant: McGill_Uni
+   ap: '{{ap_name}}'
+   epg: '{{epg_fe_name}}'
+   contract: Ext_2_DM
+   contract_type: provider
+   state: present
