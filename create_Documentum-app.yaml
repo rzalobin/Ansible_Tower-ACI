@@ -72,7 +72,7 @@
       tenant: 'McGill_Uni'
       ether_type: ip
       ip_protocol: tcp
-      dst_port: 47625
+      dst_port: '4762'
       filter: Content-Server
 
   - name: Add a new contract subject to filter binding
@@ -134,7 +134,7 @@
       tenant: 'McGill_Uni'
       ether_type: ip
       ip_protocol: tcp
-      dst_port: 8080
+      dst_port: '8080'
       filter: Documentum-FE
 
   - name: Add a new contract subject to filter binding
