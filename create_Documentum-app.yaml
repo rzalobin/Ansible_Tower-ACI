@@ -65,7 +65,6 @@
       filter: Content-Server
       tenant: 'McGill_Uni'
       state: present
-      validate_certs: no
 
   - aci_filter_entry:
       <<: *aci_login
@@ -86,7 +85,6 @@
       subject: Sub-01
       filter: Content-Server
       state: present
-      validate_certs: no
 
   - name: Add a new contract to EPG binding
     aci_epg_to_contract:
@@ -115,7 +113,6 @@
       contract: Ext_2_DM
       scope: context
       state: present
-      validate_certs: no
 
   - name: Add a new contract subject
     aci_contract_subject:
@@ -131,7 +128,6 @@
       filter: Documentum-FE
       tenant: 'McGill_Uni'
       state: present
-      validate_certs: no
 
   - aci_filter_entry:
       <<: *aci_login
@@ -152,14 +148,13 @@
       subject: Sub-01
       filter: Documentum-FE
       state: present
-      validate_certs: no
 
   - name: Bind a contract to an external EPG
     cisco.aci.aci_l3out_extepg_to_contract:
       <<: *aci_login
       tenant: 'McGill_Uni'
       l3out: L3Out-External
-      extepg : Ext-L3
+      extepg: Ext-L3
       contract: Ext_2_DM
       contract_type: consumer
       state: present
